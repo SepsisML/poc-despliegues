@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query
-from app.schemas.prediction import PredictionRequest, PatientHourRequest, PredictionResponse
+from app.schemas.prediction_schemas import PredictionRequest, PatientHourRequest, PredictionResponse
 from app.services.prediction_service import predict_from_input, predict_from_mongo
-from app.models.loader import load_model
+from app.models.model_loader import load_model
 import os
 
 router = APIRouter(prefix="/predict", tags=["Prediction"])

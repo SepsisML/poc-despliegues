@@ -8,11 +8,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar todo el código y el modelo
-COPY main.py .
-COPY models/ models/
+COPY . .
 
 # Exponer el puerto
 EXPOSE 80
-
+# Como necesitamos hacer funcionar los imports de la aplicación
+# entonces nos ubicamos en la carpeta padre "/" de app.
+WORKDIR /
 # Comando para iniciar FastAPI con Uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]

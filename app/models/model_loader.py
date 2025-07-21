@@ -3,7 +3,7 @@ import threading
 
 _model_lock = threading.Lock()
 _current_model = None
-_model_path = "../model_store/gbdt_model.pkl"
+_model_path = "app/model_store/gbdt_model.pkl"
 
 def load_model(path: str = None):
     global _current_model, _model_path
