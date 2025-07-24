@@ -1,4 +1,4 @@
-import pickle
+import joblib
 import threading
 
 _model_lock = threading.Lock()
@@ -10,7 +10,7 @@ def load_model(path: str = None):
     if path:
         _model_path = path
     with open(_model_path, "rb") as f:
-        model = pickle.load(f)
+        model = joblib.load(f)
     with _model_lock:
         _current_model = model
 

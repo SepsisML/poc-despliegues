@@ -14,7 +14,7 @@ def predict_from_input(input_data):
         prediction = model.predict(features_array)
         return {
             "prediction": int(prediction[0]),
-            "patient": input_data.Paciente,
+            "patient": "Not specified",
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -23,9 +23,8 @@ def predict_from_input(input_data):
 def predict_from_mongo(data):
     try:
         db = get_db()
-        collection = db['SepsisTraining']
-
-        query = {"Paciente": data.patient, "Hora": float(data.hour)}
+        collection = db['SepsisTraining']["DataPacientes"]
+        query = {"Paciente": data.patient, "Hora": data.hour}
         projection = {key: 1 for key in EXPECTED_KEYS}
         records = list(collection.find(query, projection))
 
